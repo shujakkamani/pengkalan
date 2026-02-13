@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Halqah Pengkalan 2024</title>
+  <style>
+    :root {
+      --emerald: #0D7C52;
+      --emerald-dark: #065535;
+      --emerald-light: #E8F5EE;
+      --gold: #C49B2A;
+      --gold-light: #FFF8E7;
+      --sand: #FAF6EF;
+      --text: #1A2332;
+      --text-mid: #4A5568;
+      --text-light: #718096;
+      --white: #FFFFFF;
+      --border: #E2E8F0;
+      --shadow: 0 4px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background: var(--sand);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, var(--emerald-dark), var(--emerald));
+      color: white;
+      padding: 40px 20px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 30px;
+      background: var(--sand);
+      border-radius: 50% 50% 0 0;
+    }
+    .header-content { position: relative; z-index: 1; }
+    .header .icon { font-size: 2.8rem; margin-bottom: 10px; }
+    .header h1 {
+      font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .header .subtitle {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      opacity: 0.85;
+      font-weight: 400;
+    }
+    .header .updated {
+      display: inline-block;
+      margin-top: 14px;
+      background: rgba(255,255,255,0.15);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin: -28px 16px 30px;
+      position: relative;
+      z-index: 2;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 16px;
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 18px 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 3px solid var(--emerald);
+    }
+    .stat-card.gold { border-top-color: var(--gold); }
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--emerald);
+      line-height: 1;
+    }
+    .stat-card.gold .stat-number { color: var(--gold); }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* ── Pengalaman summary ── */
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 30px;
+      padding: 0 16px;
+    }
+    .summary-pill {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .pill-dot.t3 { background: var(--emerald-dark); }
+    .pill-dot.t2 { background: var(--emerald); }
+    .pill-dot.t1 { background: #43b88e; }
+    .pill-dot.b4 { background: var(--gold); }
+    .pill-dot.h40 { background: #E67E22; }
+    .pill-dot.h3 { background: #89CFF0; }
+
+    /* ── Search ── */
+    .search-wrap {
+      max-width: 500px;
+      margin: 0 auto 30px;
+      padding: 0 16px;
+    }
+    .search-box {
+      width: 100%;
+      padding: 14px 18px 14px 46px;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.95rem;
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      font-family: inherit;
+    }
+    .search-box:focus {
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 4px rgba(13,124,82,0.1);
+    }
+    .search-wrap { position: relative; }
+    .search-icon {
+      position: absolute;
+      left: 34px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      opacity: 0.4;
+    }
+
+    /* ── Nav tabs ── */
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 0 16px 16px;
+      margin-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tab {
+      flex-shrink: 0;
+      padding: 10px 18px;
+      border-radius: 50px;
+      border: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: var(--white);
+      color: var(--text-mid);
+      border: 1.5px solid var(--border);
+      font-family: inherit;
+    }
+    .nav-tab:hover { border-color: var(--emerald); color: var(--emerald); }
+    .nav-tab.active {
+      background: var(--emerald);
+      color: white;
+      border-color: var(--emerald);
+    }
+
+    /* ── Masjid card ── */
+    .masjid-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      margin: 0 0 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .masjid-card:hover { box-shadow: var(--shadow-lg); }
+    .masjid-header {
+      padding: 20px 22px;
+      background: linear-gradient(135deg, var(--emerald-dark), var(--emerald));
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .masjid-header.five-amal {
+      background: linear-gradient(135deg, #7B5E10, var(--gold));
+    }
+    .masjid-name {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .masjid-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.2);
+      margin-top: 2px;
+    }
+    .masjid-count {
+      background: rgba(255,255,255,0.2);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .masjid-count .num { font-size: 1.5rem; font-weight: 800; line-height: 1; }
+    .masjid-count .lbl { font-size: 0.65rem; opacity: 0.8; }
+    .toggle-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .masjid-card.open .toggle-icon { transform: rotate(180deg); }
+
+    /* Details panel */
+    .masjid-details {
+      display: none;
+      padding: 0 22px 22px;
+    }
+    .masjid-card.open .masjid-details { display: block; }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .detail-item {
+      padding: 10px 14px;
+      background: var(--emerald-light);
+      border-radius: var(--radius-sm);
+    }
+    .detail-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--emerald);
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .detail-value {
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .detail-item.pending .detail-value { color: #C0392B; }
+
+    /* Members table */
+    .members-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .members-table thead th {
+      text-align: left;
+      padding: 10px 12px;
+      background: var(--sand);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+    }
+    .members-table tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    .members-table tbody tr:hover { background: var(--emerald-light); }
+    .members-table tbody tr:last-child td { border-bottom: none; }
+
+    .exp-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .exp-4b { background: #FEF3CD; color: #856404; }
+    .exp-40h { background: #FEEBC8; color: #9C4221; }
+    .exp-20h { background: #E9D8FD; color: #553C9A; }
+    .exp-10h { background: #C6F6D5; color: #276749; }
+    .exp-7h { background: #BEE3F8; color: #2B6CB0; }
+    .exp-3h { background: #E8F5EE; color: #2D8659; }
+
+    .status-married { color: var(--emerald); }
+    .status-single { color: var(--gold); }
+
+    /* Table scroll on mobile */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .table-wrap::-webkit-scrollbar { height: 4px; }
+    .table-wrap::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+    .member-summary {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .member-summary .ms-pill {
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--text-light);
+      font-size: 0.78rem;
+    }
+    .footer a {
+      color: var(--emerald);
+      text-decoration: none;
+    }
+
+    /* ── Animations ── */
+    .fade-in {
+      animation: fadeIn 0.5s ease-out both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .header { padding: 30px 16px 40px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); margin-top: -20px; }
+      .members-table { font-size: 0.78rem; }
+      .members-table thead th, .members-table tbody td { padding: 8px 8px; }
+      .masjid-header { padding: 16px; }
+    }
+
+    @media (min-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* Print styles */
+    @media print {
+      .search-wrap, .nav-tabs, .sticky-cta { display: none; }
+      .masjid-card.open .masjid-details { display: block; }
+      .header { padding: 20px; }
+      .header::after { display: none; }
+      body { background: white; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-content">
+    <div class="icon">🕌</div>
+    <h1>Profil Halqah Pengkalan</h1>
+    <p class="subtitle">Mesyuarat Mingguan: Jumaat, Selepas Isya' — Masjid Ibnu Salam</p>
+    <div class="updated">📅 Dikemas kini: 10 November 2025</div>
+  </div>
+</header>
+
+<!-- ═══ STATS ═══ -->
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="stat-number">15</div>
+    <div class="stat-label">Masjid & Surau</div>
+  </div>
+  <div class="stat-card gold">
+    <div class="stat-number">2</div>
+    <div class="stat-label">5 Amal</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number">6</div>
+    <div class="stat-label">Beberapa Amal</div>
+  </div>
+  <div class="stat-card gold">
+    <div class="stat-number">102</div>
+    <div class="stat-label">Jumlah Ahbab</div>
+  </div>
+</div>
+
+<!-- Pengalaman summary -->
+<div class="summary-row">
+  <div class="summary-pill"><span class="pill-dot b4"></span>4 Bulan: 17</div>
+  <div class="summary-pill"><span class="pill-dot h40"></span>40 Hari: 27</div>
+  <div class="summary-pill"><span class="pill-dot h3"></span>3 Hari+: 58</div>
+</div>
+
+<!-- ═══ SEARCH ═══ -->
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input type="text" class="search-box" id="searchBox" placeholder="Cari nama ahbab atau masjid...">
+</div>
+
+<!-- ═══ NAV TABS ═══ -->
+<div class="container">
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" data-filter="all">Semua</button>
+    <button class="nav-tab" data-filter="5amal">5 Amal ⭐</button>
+    <button class="nav-tab" data-filter="beberapa">Beberapa Amal</button>
+  </div>
+</div>
+
+<!-- ═══ MASJID LIST ═══ -->
+<div class="container" id="masjidList">
+
+  <!-- 1. MASJID AL-FURQAN -->
+  <div class="masjid-card open fade-in" data-category="5amal" data-name="Masjid Al-Furqan">
+    <div class="masjid-header five-amal" onclick="toggleCard(this)">
+      <div>
+        <div class="masjid-name">1. Masjid Al-Furqan</div>
+        <span class="masjid-badge">⭐ 5 Amal</span>
+      </div>
+      <div class="masjid-count">
+        <div class="num">26</div>
+        <div class="lbl">Ahbab</div>
+      </div>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="masjid-details">
+      <div class="detail-grid">
+        <div class="detail-item"><div class="detail-label">Mesyuarat</div><div class="detail-value">Subuh</div></div>
+        <div class="detail-item"><div class="detail-label">Taklim</div><div class="detail-value">Asar</div></div>
+        <div class="detail-item"><div class="detail-label">AMM</div><div class="detail-value">Maghrib</div></div>
+        <div class="detail-item"><div class="detail-label">Gast 1</div><div class="detail-value">Khamis</div></div>
+        <div class="detail-item"><div class="detail-label">Gast 2</div><div class="detail-value">Jumaat (Surau SSI)</div></div>
+        <div class="detail-item"><div class="detail-label">Khuruj 3 Hari</div><div class="detail-value">2 Jemaah, Minggu ke-2 & ke-3</div></div>
+        <div class="detail-item"><div class="detail-label">Taklim Masturat</div><div class="detail-value">Rumah Firdaus, Ahad, 10:00–11:30</div></div>
+        <div class="detail-item"><div class="detail-label">Maktab</div><div class="detail-value">8 tempat</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="members-table">
+          <thead><tr><th>#</th><th>Nama</th><th>Status</th><th>Pengalaman (L)</th><th>Pengalaman (M)</th><th>Taklim Rumah</th><th>Azam 2025</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Firdaus</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>10 Hari</td><td>5 Amal</td><td>4B USA Mac</td></tr>
+            <tr><td>2</td><td>Wan Tabarani</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>10H x2, 3H</td><td>5 Amal</td><td>45H NJ Ogos</td></tr>
+            <tr><td>3</td><td>Zulfadli</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>4</td><td>Hj Asri</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>3H</td><td>Beberapa Amal</td><td>40H Nov</td></tr>
+            <tr><td>5</td><td>Afif</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>3H</td><td>—</td><td>—</td></tr>
+            <tr><td>6</td><td>Pak Cik Yusry</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-20h">20 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>7</td><td>Nashriq</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>3H (Ibu)</td><td>—</td><td>—</td></tr>
+            <tr><td>8</td><td>Afiq</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>9</td><td>Khairul</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>Beberapa Amal</td><td>—</td></tr>
+            <tr><td>10</td><td>Kamal</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>11</td><td>Cg Fakhrul</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>12</td><td>Syafiq</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>13</td><td>Mansor</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>Beberapa Amal</td><td>40H Nov</td></tr>
+            <tr><td>14</td><td>Ilyas</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>15</td><td>Muhammad</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>16</td><td>Zikri</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>17</td><td>Afifi</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>18</td><td>Man Saham</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>19</td><td>Azhar</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>20</td><td>Azhar UniKL</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>21</td><td>Ust Safri</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>22</td><td>Hj Nordin</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>23</td><td>Hj Abdul Manaf</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>24</td><td>Pak Long Husni</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-7h">7 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>25</td><td>Abg Mi</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>26</td><td>Ust Suhaim</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="member-summary">
+        <span class="ms-pill exp-4b">4B: 3</span>
+        <span class="ms-pill exp-40h">40H: 5</span>
+        <span class="ms-pill exp-3h">3H: 18</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MASJID IBNU SALAM -->
+  <div class="masjid-card fade-in" data-category="5amal" data-name="Masjid Ibnu Salam">
+    <div class="masjid-header five-amal" onclick="toggleCard(this)">
+      <div>
+        <div class="masjid-name">2. Masjid Ibnu Salam</div>
+        <span class="masjid-badge">⭐ 5 Amal</span>
+      </div>
+      <div class="masjid-count">
+        <div class="num">44</div>
+        <div class="lbl">Ahbab</div>
+      </div>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="masjid-details">
+      <div class="detail-grid">
+        <div class="detail-item"><div class="detail-label">Mesyuarat</div><div class="detail-value">Subuh</div></div>
+        <div class="detail-item"><div class="detail-label">Taklim</div><div class="detail-value">Subuh</div></div>
+        <div class="detail-item"><div class="detail-label">AMM</div><div class="detail-value">Maghrib / Isya</div></div>
+        <div class="detail-item"><div class="detail-label">Gast 1</div><div class="detail-value">Selasa</div></div>
+        <div class="detail-item"><div class="detail-label">Gast 2</div><div class="detail-value">Jumaat (Pengkalan Bandar Raya)</div></div>
+        <div class="detail-item"><div class="detail-label">Khuruj 3 Hari</div><div class="detail-value">1 Jemaah, Minggu ke-3</div></div>
+        <div class="detail-item"><div class="detail-label">Maktab</div><div class="detail-value">6 tempat</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="members-table">
+          <thead><tr><th>#</th><th>Nama</th><th>Status</th><th>Pengalaman (L)</th><th>Pengalaman (M)</th><th>Azam 2025</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Hj Mohsen (Syura)</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>10H</td><td>—</td></tr>
+            <tr><td>2</td><td>Razman</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>3H</td><td>40H Nov</td></tr>
+            <tr><td>3</td><td>Maher (Bob)</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>3H (Ibu)</td><td>45H Oct</td></tr>
+            <tr><td>4</td><td>Syakil</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>—</td><td>—</td></tr>
+            <tr><td>5</td><td>Azlan (Pie)</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>—</td><td>—</td></tr>
+            <tr><td>6</td><td>Azrul (Loi)</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>—</td><td>—</td></tr>
+            <tr><td>7</td><td>Ust Saparudin</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>8</td><td>Amer</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>40H Nov</td></tr>
+            <tr><td>9</td><td>Ali Bhai</td><td>—</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>10</td><td>Imran (Kawan Loi)</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>11</td><td>Iman (Anak Hj Mohsen)</td><td class="status-single">Bujang</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>40H Oct</td></tr>
+            <tr><td>12</td><td>Harith</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>3H</td><td>—</td></tr>
+            <tr><td>13</td><td>Amin Ust Azam</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>14</td><td>Pit</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>15</td><td>Mat Min (Chor)</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>16</td><td>Choyet</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>17</td><td>Paih</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>18</td><td>Daniel Desa Aman</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>19</td><td>Megat</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>20</td><td>Fendi Ikan</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>21</td><td>Aidil Anak Fendi</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>22</td><td>Anif Siak Ibnu Salam</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>23</td><td>Orik</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>24</td><td>Pak Lah</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>25</td><td>Cg Hakim</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>26</td><td>Mazlan Desa Pengkalan</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>27</td><td>Taufik Desa Pengkalan</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>28</td><td>Zaaim Imam Omar</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>29</td><td>Qayyum Santan</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>30</td><td>Akil Desa Aman</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>31</td><td>Adik Ridwan</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>32</td><td>Adik Idham</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>33</td><td>Adik Afiq</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>34</td><td>Adik Nubhan</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>35</td><td>Adik Hazriq</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>36</td><td>Hanzalah (Abg Saiful)</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>37</td><td>Hj Khairul</td><td>—</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>38</td><td>Khairuddin</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>39</td><td>Ajizul</td><td>—</td><td><span class="exp-badge exp-4b">4 Bulan</span></td><td>10H</td><td>40H Oct</td></tr>
+            <tr><td>40</td><td>Pak Man Bomba</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>41</td><td>Hj Ali</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>42</td><td>Yus</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>43</td><td>Zakuan</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>44</td><td>Ridzuan (Chor)</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="member-summary">
+        <span class="ms-pill exp-4b">4B: 7</span>
+        <span class="ms-pill exp-40h">40H: 6</span>
+        <span class="ms-pill exp-3h">3H: 31</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SURAU NURUL IMAN -->
+  <div class="masjid-card fade-in" data-category="beberapa" data-name="Surau Nurul Iman">
+    <div class="masjid-header" onclick="toggleCard(this)">
+      <div>
+        <div class="masjid-name">3. Surau Nurul Iman</div>
+        <span class="masjid-badge">Beberapa Amal</span>
+      </div>
+      <div class="masjid-count">
+        <div class="num">6</div>
+        <div class="lbl">Ahbab</div>
+      </div>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="masjid-details">
+      <div class="detail-grid">
+        <div class="detail-item"><div class="detail-label">Mesyuarat</div><div class="detail-value">Fikir Harian</div></div>
+        <div class="detail-item"><div class="detail-label">Taklim</div><div class="detail-value">Isya</div></div>
+        <div class="detail-item detail-item pending"><div class="detail-label">AMM</div><div class="detail-value">Belum Ada</div></div>
+        <div class="detail-item detail-item pending"><div class="detail-label">Gast 1</div><div class="detail-value">Belum Ada</div></div>
+        <div class="detail-item detail-item pending"><div class="detail-label">Gast 2</div><div class="detail-value">Belum Ada</div></div>
+        <div class="detail-item detail-item pending"><div class="detail-label">Khuruj 3 Hari</div><div class="detail-value">Belum Ada</div></div>
+        <div class="detail-item"><div class="detail-label">Penduduk</div><div class="detail-value">1,000++</div></div>
+        <div class="detail-item"><div class="detail-label">Taklim Rumah</div><div class="detail-value">2</div></div>
+        <div class="detail-item"><div class="detail-label">Maktab</div><div class="detail-value">3 tempat</div></div>
+        <div class="detail-item"><div class="detail-label">Catatan</div><div class="detail-value">Route Jemaah Halqah Menglembu</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="members-table">
+          <thead><tr><th>#</th><th>Nama</th><th>Status</th><th>Pengalaman (L)</th><th>Taklim Rumah</th><th>Azam 2025</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Farid</td><td>—</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>2</td><td>Shujak</td><td class="status-married">Berkahwin</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>Beberapa Amal</td><td>40H Oct</td></tr>
+            <tr><td>3</td><td>Haris</td><td>—</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>Beberapa Amal</td><td>40H Nov</td></tr>
+            <tr><td>4</td><td>Amir Rashid</td><td>—</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>5</td><td>Amin Spec</td><td>—</td><td><span class="exp-badge exp-40h">40 Hari</span></td><td>—</td><td>—</td></tr>
+            <tr><td>6</td><td>Amirul (Roy)</td><td>—</td><td><span class="exp-badge exp-3h">3 Hari</span></td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="member-summary">
+        <span class="ms-pill exp-40h">40H: 5</span>
+        <span class="ms-pill exp-3h">3H: 1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. SURAU AL-HIDAYAH -->
+  <div class="masjid-card fade-in" data-category="beberapa" data-name="Surau Al-Hidayah Bangladesh">
+    <div class="masjid-header" onclick="toggleCard(this)">
+      <div>
+        <div class="masjid-name">4. Surau Al-Hidayah (Bangladesh)</div>
+        <span class="masjid-badge">Beberapa Amal</span>
+      </div>
+      <div class="masjid-count">
+        <div class="num">2</div>
+        <div class="lbl">Ahbab</div>
+      </div>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="masjid-details">
+      <div class="detail-grid">
+        <div class="detail-item"><div class="detail-label">Mesyuarat</div><div class="detail-value">Lepas Taklim</div></div>
+        <div class="detail-item"><div class="detail-label">Taklim</div><div class="detail-value">Isya</div></div>
+        <div class="detail-item"><div class="detail-label">AMM</div><div class="detail-value">Asar / Isya</div></div>
+        <div class="detail-item"><div class="detail-label">Gast 1</div><div class="detail-value">Ahad</div></div>
+        <div class="detail-item detail-item pending"><div class="detail-label">Gast 2</div><div class="detail-value">Belum Ada</div></div>
+        <div class="detail-item detail-item pending"><div class="detail-label">Khuruj 3 Hari</div><div class="detail-value">Belum Ada</div></div>
+        <div class="detail-item"><div class="detail-label">Penduduk</div><div class="detail-value">Bawah 300 (Bangladeshi)</div></div>
+        <div class="detail-item"><div class="detail-label">Maktab</div><div class="detail-value">1 (Surau)</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="members-table">
+          <thead><tr><th>#</th><th>Nama</th><th>Pengalaman (L)</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Imam Bilal (Bangladesh, Ulama)</td><td><span class="exp-badge exp-40h">40 Hari</span></td></tr>
+            <tr><td>2</td><td>Nurul Islam (Bangladesh)</td><td><span class="exp-badge exp-40h">40 Hari</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>🕌 Profil Ahbab Halqah Pengkalan 2024</p>
+  <p style="margin-top:6px;">Data sumber: <a href="https://docs.google.com/spreadsheets/d/18S_v_OS-1YLzmjVFBwVLWbJ5MD2EowsN/edit?gid=672595783#gid=672595783" target="_blank">Google Sheets</a></p>
+</footer>
+
+<script>
+  // Toggle card open/close
+  function toggleCard(header) {
+    var card = header.closest('.masjid-card');
+    card.classList.toggle('open');
+  }
+
+  // Filter tabs
+  document.getElementById('navTabs').addEventListener('click', function(e) {
+    if (!e.target.classList.contains('nav-tab')) return;
+    document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+    e.target.classList.add('active');
+    var filter = e.target.getAttribute('data-filter');
+    document.querySelectorAll('.masjid-card').forEach(function(card) {
+      if (filter === 'all' || card.getAttribute('data-category') === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  // Search
+  document.getElementById('searchBox').addEventListener('input', function() {
+    var q = this.value.toLowerCase();
+    document.querySelectorAll('.masjid-card').forEach(function(card) {
+      var text = card.textContent.toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+    // Reset active tab
+    document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelector('.nav-tab[data-filter="all"]').classList.add('active');
+  });
+</script>
+</body>
+</html>
